@@ -6,13 +6,13 @@ import Typed from "typed.js";
 export default function DropboxFrontPage() {
   const navigate = useNavigate();  
   const images = [
-    "Marketing/IMG-1.jpg",
-    "Marketing/IMG-2.jpg",
-    "Marketing/IMG-3.jpg",
-    "Marketing/IMG-4.jpg",
-    "Marketing/IMG-5.jpg",
+    "Marketing/IMG-1.jpeg",
+    "Marketing/IMG-2.jpeg",
+    "Marketing/IMG-3.jpeg",
+    "Marketing/IMG-4.jpeg",
+    "Marketing/IMG-5.jpeg",
     "Marketing/IMG-6.jpeg",
-    "Marketing/IMG-7.jpg",
+    "Marketing/IMG-7.jpeg",
   ];
 
   const Features = [
