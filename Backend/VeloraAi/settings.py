@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('DjongoSECRETKEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://interview-automation-psi.vercel.app/","http://localhost:5173/"]
 
 # Application definition
 

@@ -106,14 +106,14 @@ const WhatNew = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-950 text-gray-200">
+    <div className="min-h-screen py-12 px-14 sm:px-6 lg:px-8 bg-gray-950 text-gray-200">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
            
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            What's New in Velora AI
+            What's New in Velora
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Discover the latest features and improvements designed to

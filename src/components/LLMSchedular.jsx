@@ -5,6 +5,7 @@ import {RotateCw, Pause, Mic, MicOff, SkipForward,Circle } from 'lucide-react';
 import toast from "react-hot-toast";
 
 const ScheduleInterview = () => {
+  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
   // Hardcoded JSON data
   const initialData = {
     resume: "SGVsbG8gV29ybGQhIFRoaXMgaXMgYSBzYW1wbGUgcmVzdW1lIGluIEJhc2U2NC4=", // "Hello World! This is a sample resume in Base64."
@@ -55,7 +56,7 @@ const ScheduleInterview = () => {
 
   const fetchQuestions = async (orgNeed, positionLevel) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/qns/", {              // https://llm-schedular.onrender.com/qns   ---   http://127.0.0.1:8000
+      const response = await fetch(`${backendURL}/qns/`, {             
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -87,7 +88,7 @@ const ScheduleInterview = () => {
       const formData = new FormData();
       formData.append("file", RecordingBlob, "audio.wav");
 
-      const response = await fetch("http://127.0.0.1:8000/stt/", {                 // https://llm-schedular.onrender.com/stt   ----   http://127.0.0.1:8000
+      const response = await fetch(`${backendURL}/stt/`, {               
         method: "POST",
         body: formData,
       });
@@ -135,7 +136,7 @@ const ScheduleInterview = () => {
 
   const TTS = async (text) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/tts/", {               // https://llm-schedular.onrender.com/tts   ---   http://127.0.0.1:8000
+      const response = await fetch(`${backendURL}/tts/`, {             
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text })

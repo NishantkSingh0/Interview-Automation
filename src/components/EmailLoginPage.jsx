@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export default function OrgLogin() {
   const navigate = useNavigate();
+  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
   const location = useLocation();
   const [Details, setDetails] = useState({
     email: "",
@@ -30,7 +31,7 @@ export default function OrgLogin() {
 
     if (location.state?.from==="Org"){
       try {
-        const response = await fetch("http://127.0.0.1:8000/get-organization/", {
+        const response = await fetch(`${backendURL}/get-organization/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export default function OrgLogin() {
     }
     else{
       try {
-        const response = await fetch("http://127.0.0.1:8000/get-student/", {
+        const response = await fetch(`${backendURL}/get-student/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Typed from "typed.js";
 
 export default function DropboxFrontPage() {
+  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
   const navigate = useNavigate();  
   const images = [
     "Marketing/IMG-1.jpeg",
@@ -33,7 +34,7 @@ export default function DropboxFrontPage() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-      fetch("http://127.0.0.1:8000/wakeup/")
+      fetch(`${backendURL}/wakeup/`)
         .catch(() => {});
   }, []);
 

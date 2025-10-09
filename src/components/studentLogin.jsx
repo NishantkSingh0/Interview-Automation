@@ -10,7 +10,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
 export default function StudentLogin() {
-
+  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
   // if (window.innerWidth < 1024) {
   //   return <ScreenWarning />;  // Smaller screens not allowed
   // }
@@ -55,7 +55,7 @@ export default function StudentLogin() {
       formDataToSend.append("Resume", file);
       
       try {
-        const res = await fetch("http://127.0.0.1:8000/ParseResumes/", {
+        const res = await fetch(`${backendURL}/ParseResumes/`, {
           method: "POST",
           body: formDataToSend,
         });
@@ -107,7 +107,7 @@ export default function StudentLogin() {
     }
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/create-student/", {
+      const response = await fetch(`${backendURL}/create-student/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

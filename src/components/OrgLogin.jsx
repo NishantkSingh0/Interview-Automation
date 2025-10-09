@@ -3,6 +3,7 @@ import { useNavigate, useLocation  } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function OrgLogin() {
+  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
   const navigate = useNavigate();
   const location = useLocation();
   const levels=["Startup", "Growing", "Mature", "Enterprise"]
@@ -42,7 +43,7 @@ export default function OrgLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/create-org/", {
+      const response = await fetch(`${backendURL}/create-org/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
