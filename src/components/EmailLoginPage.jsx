@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export default function OrgLogin() {
   const navigate = useNavigate();
-  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
+  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com
   const location = useLocation();
   const [Details, setDetails] = useState({
     email: "",

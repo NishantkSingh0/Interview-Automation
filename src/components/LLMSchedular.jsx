@@ -5,7 +5,7 @@ import {RotateCw, Pause, Mic, MicOff, SkipForward,Circle } from 'lucide-react';
 import toast from "react-hot-toast";
 
 const ScheduleInterview = () => {
-  const backendURL="https://interview-automation.onrender.com/"     //    http://127.0.0.1:8000/   --   https://interview-automation.onrender.com/ 
+  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
   // Hardcoded JSON data
   const initialData = {
     resume: "SGVsbG8gV29ybGQhIFRoaXMgaXMgYSBzYW1wbGUgcmVzdW1lIGluIEJhc2U2NC4=", // "Hello World! This is a sample resume in Base64."
