@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('DjongoSECRETKEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://interview-automation-psi.vercel.app/","http://localhost:5173/"]
+ALLOWED_HOSTS = ["interview-automation.onrender.com", "interview-automation-psi.vercel.app", "localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'api',
 ]
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+CORS_ALLOWED_ORIGINS = ['https://interview-automation-psi.vercel.app','http://localhost:5173']
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
