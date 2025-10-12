@@ -32,10 +32,22 @@ export default function StudentLogin() {
   const navigate=useNavigate();
 
   useEffect(() => {
-    if (location.state?.email) {
-      setFormData((prev) => ({ ...prev, StudentMail: location.state.email }));
+    console.log("Location state received:", location.state);
+    const { Designation, StudentName, ExpectedPosition } = location.state || {};
+
+    if (Designation || StudentName || ExpectedPosition) {
+      setFormData((prev) => ({
+        ...prev,
+        ...(Designation && { Designation }),
+        ...(StudentName && { StudentName }),
+        ...(ExpectedPosition && { ExpectedPosition }),
+      }));
     }
-  }, [location.state?.email]);
+  }, [
+    location.state?.Designation,
+    location.state?.StudentName,
+    location.state?.ExpectedPosition,
+  ]);
 
   const handleSelectChange = (val) => {
     setFormData({ ...formData, Designation: val });
@@ -120,7 +132,7 @@ export default function StudentLogin() {
 
       if (result.status === "created") {
         toast.success("You are registered successfully.");
-        navigate('/verification', { state: result.data })
+        navigate('/Student/StdDashboard', { state: result.data })
         toast.success("Organization created successfully!");
       } else {
         toast.error("Failed to register!");
@@ -189,7 +201,8 @@ export default function StudentLogin() {
                 <label className="block text-sm font-medium text-gray-300">Full Name</label>
                 <input
                   type="text"
-                  placeholder='abc xyz'
+                  placeholder="abc xyz"
+                  value={formData.StudentName}   // ✅ bind value to state
                   className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
                   onChange={(e) => setFormData({ ...formData, StudentName: e.target.value })}
                 />

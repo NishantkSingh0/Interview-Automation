@@ -17,6 +17,7 @@ import ScheduleInterview from "./components/LLMSchedular.jsx";
 import InterviewRulesPage from "./components/RulesPage.jsx";
 import AddCandidateBatch from "./components/AddCandidatesBatch.jsx";
 import PricingPage from './components/PricingPage.jsx';
+import StdDashboard from './components/StdDashboard.jsx';
 import PreInterviewCheck from "./components/Cam.jsx";
 import ExamPage from "./components/ExamPage.jsx";
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           {/* <Route path="/Login" element={<Animate><LoginUi /></Animate>} /> */}
           <Route path="/Student" element={<Animate><StudentLogin /></Animate>} />
+          <Route path="/Student/StdDashboard" element={<Animate><StdDashboard /></Animate>} />
           <Route path="/WhatsNew" element={<Animate><WhatNew /></Animate>} />
           <Route path="/Candidate" element={<Animate><CandidateLogin /></Animate>} />
           <Route path="/Organization" element={<Animate><OrgLogin /></Animate>} />

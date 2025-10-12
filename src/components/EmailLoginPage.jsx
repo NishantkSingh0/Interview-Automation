@@ -6,10 +6,8 @@ export default function OrgLogin() {
   const navigate = useNavigate();
   const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com
   const location = useLocation();
-  const [Details, setDetails] = useState({
-    email: "",
-  });
-  console.log(location.state?.from, "location.state?.from===Org", location.state?.from==="Org")
+  const [Details, setDetails] = useState({email: ""});
+  // console.log(location.state?.from, "location.state?.from===Org", location.state?.from==="Org")
 
   const [loading, setLoading] = useState(false); // track loading
 
@@ -19,11 +17,11 @@ export default function OrgLogin() {
 
   const handleNext = async () => {
     if (!Details.email) {
-      if (location.state?.from==="Org"){
+      if (location.state?.from === "Org") {
         toast.error("Please enter your Organization Email!");
-      }
-      else (location.state?.from==="Std")
+      } else {
         toast.error("Please enter your Personal Email!");
+      }
       return;
     }
 
@@ -44,7 +42,7 @@ export default function OrgLogin() {
         // console.log("Status raw:", result.status, "| type:", typeof result.status, "not_found===result.status:", "not_found"===result.status);
         if (result.status === "exists") {
           toast.success("Organization found!");
-          navigate("/Organization/OrgDashboard");//, { state: result.data });
+          navigate("/Organization/OrgDashboard", { state: result.data });
         } else if (result.status === "not_found") {
           toast.error("Organization not found. Please register!");
           navigate("/Organization", { state: { email: Details.email } });
@@ -73,7 +71,7 @@ export default function OrgLogin() {
         // console.log("Status raw:", result.status, "| type:", typeof result.status, "not_found===result.status:", "not_found"===result.status);
         if (result.status === "exists") {
           toast.success("Student found!");
-          navigate("/verification", { state: result.data });
+          navigate("/Student/StdDashboard", { state: result.data });
         } else if (result.status === "not_found") {
           toast.error("Student not found. Please register!");
           navigate("/Student", { state: { email: Details.email } });
@@ -94,7 +92,7 @@ export default function OrgLogin() {
       <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-[500px]">
         <div className="space-y-2">
           <label className="block text-sm font-medium">
-            {location.state?.from==="Org"?"Organization Primary Email":"Personal Email"}
+            {location.state?.from==="Org"?"Organization Primary Email":"Your Personal Email"}
           </label>
             <input
               type="text"
