@@ -1,4 +1,4 @@
-backend/venv/
+backend/Venv/
 node_modules
 Backend/private.txt
 *.env

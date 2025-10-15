@@ -70,7 +70,6 @@ export default function DropboxFrontPage() {
         <nav className="flex items-center justify-between px-10 py-4 border-y border-gray-700 sticky top-0 backdrop-blur-lg z-50">
 
           <div className="hidden md:block text-xl font-bold bg-gradient-to-r  from-blue-400 to-purple-500 bg-clip-text text-transparent">
-
             AI Based Hiring Management System
           </div>
           <div className="flex items-center gap-6">
@@ -203,7 +202,7 @@ export default function DropboxFrontPage() {
         <li><a href="#" className="hover:text-teal-400 transition-colors">What's new We provide</a></li>
         <li><a href="#" className="hover:text-teal-400 transition-colors">Home Page</a></li>
         <li><a href="#" className="hover:text-teal-400 transition-colors">Features Page</a></li>
-        <li><a href="#" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
+        <li><a href="https://interview-automation-psi.vercel.app/#/Pricings" target="_blank" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
       </ul>
     </div>
 
