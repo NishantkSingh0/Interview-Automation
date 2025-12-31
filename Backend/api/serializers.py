@@ -26,6 +26,16 @@ class StudentSerializer(serializers.Serializer):
 
 
 # {
+#     "Email" : ""
+#     "Name" : ""
+#     "Tokens" : 0
+#     "OrgSize" : ""
+#     "CandNames" : []
+#     "CandScores" : []
+#     "ResumeInfo" : []
+# }
+
+# {
 #     "StudentMail" : ""
 #     "StudentName" : ""
 #     "Tokens" : 0
