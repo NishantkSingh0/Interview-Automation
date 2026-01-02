@@ -112,7 +112,7 @@ const WhatNew = () => {
           <div className="inline-block mb-4">
            
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             What's New in Velora
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -158,7 +158,7 @@ const WhatNew = () => {
           <p className="text-gray-400 text-lg mb-6">
             Stay tuned for more exciting updates and features
           </p>
-          <div className="inline-block rounded-full p-1 bg-gradient-to-r from-blue-500 to-purple-500">
+          <div className="inline-block rounded-full p-1 bg-linear-to-r from-blue-500 to-purple-500">
             <div className="px-8 py-4 bg-gray-900 rounded-full">
               <span className="text-white font-semibold text-lg">
                 Velora AI 

@@ -207,7 +207,7 @@ const InterviewRulesPage = () => {
                     <ul className="space-y-2">
                       {section.points.map((point, pointIndex) => (
                         <li key={pointIndex} className="flex items-start gap-2 text-gray-300">
-                          <CheckCircle size={16} className="text-green-400 mt-1 flex-shrink-0" />
+                          <CheckCircle size={16} className="text-green-400 mt-1 shrink-0" />
                           <span className="text-sm">{point}</span>
                         </li>
                       ))}
