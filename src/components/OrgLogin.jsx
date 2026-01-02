@@ -3,7 +3,7 @@ import { useNavigate, useLocation  } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function OrgLogin() {
-  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
+  const backendURL= import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
   const navigate = useNavigate();
   const location = useLocation();
   const levels=["Startup", "Growing", "Mature", "Enterprise"]
@@ -72,7 +72,7 @@ export default function OrgLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-[500px]">
+      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-125">
         <h1 className="text-2xl font-bold text-center mb-6">
           Organization Details
         </h1>

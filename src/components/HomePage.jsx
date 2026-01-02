@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Typed from "typed.js";
 
 export default function DropboxFrontPage() {
-  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
+  const backendURL=import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";   
   const navigate = useNavigate();  
   const images = [
     "Marketing/IMG-1.jpeg",
@@ -66,10 +66,10 @@ export default function DropboxFrontPage() {
   return (
     <>
       {/* Hero section */}
-      <section id="Home" className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 py-10 text-white flex flex-col">
+      <section id="Home" className="min-h-screen bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 py-10 text-white flex flex-col">
         <nav className="flex items-center justify-between px-10 py-4 border-y border-gray-700 sticky top-0 backdrop-blur-lg z-50">
 
-          <div className="hidden md:block text-xl font-bold bg-gradient-to-r  from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <div className="hidden md:block text-xl font-bold bg-linear-to-r  from-blue-400 to-purple-500 bg-clip-text text-transparent">
             AI Based Hiring Management System
           </div>
           <div className="flex items-center gap-6">
@@ -103,11 +103,11 @@ export default function DropboxFrontPage() {
               AI Based Hiring Management System
             </h2> */}
             <h1 className="text-4xl md:text-5xl font-extrabold mt-4 leading-snug">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 Smarter Hiring.
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                 Faster Scheduling.
               </span>
             </h1>
@@ -130,7 +130,7 @@ export default function DropboxFrontPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex-1 hidden lg:flex justify-center items-center min-h-[350px]"
+            className="flex-1 hidden lg:flex justify-center items-center min-h-87.5"
           >
             <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-gray-900">
               <img
@@ -145,10 +145,10 @@ export default function DropboxFrontPage() {
       </section>
 
       {/* Marketing Section */}
-      <section id="Features" className="w-full hidden lg:block bg-gradient-to-r from-gray-950 via-gray-900 to-black py-20 text-white">
+      <section id="Features" className="w-full hidden lg:block bg-linear-to-r from-gray-950 via-gray-900 to-black py-20 text-white">
         <div className="flex flex-col items-center justify-center mb-12">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Workflow and Schedules</h1>
-          <div className="w-[15%] h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-6 mx-auto mt-3 rounded"></div>
+          <h1 className="text-3xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Workflow and Schedules</h1>
+          <div className="w-[15%] h-1 bg-linear-to-r from-blue-500 to-purple-600 mb-6 mx-auto mt-3 rounded"></div>
         </div>
         <div className="max-w-6xl mx-auto flex justify-center items-center gap-6">
           {[leftIndex, activeIndex, rightIndex].map((index) => {
@@ -173,7 +173,7 @@ export default function DropboxFrontPage() {
                 <img
                   src={images[index] || ""}
                   alt={`feature-${index}`}
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-75 object-cover"
                   draggable="false"
                 />
               </motion.div>
@@ -185,40 +185,40 @@ export default function DropboxFrontPage() {
         </div>
       </section>
 
-     <footer className="bg-gray-900 text-gray-200 px-8 py-12">
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    {/* About Section */}
-    <div>
-      <h2 className="text-white font-bold text-lg mb-4">Make Interviews Smarter + Deeper</h2>
-      <p className="text-gray-400 leading-relaxed">
-        Streamline your hiring process with AI-powered interviews, automated scheduling, and comprehensive candidate evaluation. Accessible for organizations and individuals at an affordable cost.
-      </p>
+  <footer className="bg-gray-900 text-gray-200 px-8 pt-12 pb-4">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* About Section */}
+      <div>
+        <h2 className="text-white font-bold text-lg mb-4">Make Interviews Smarter + Deeper</h2>
+        <p className="text-gray-400 leading-relaxed">
+          Streamline your hiring process with AI-powered interviews, automated scheduling, and comprehensive candidate evaluation. Accessible for organizations and individuals at an affordable cost.
+        </p>
+      </div>
+
+      {/* Quick Links */}
+      <div>
+        <h2 className="text-white font-bold text-lg mb-4">Quick Links</h2>
+        <ul className="space-y-2">
+          <li><a href="#" className="hover:text-teal-400 transition-colors">What's new We provide</a></li>
+          <li><a href="#" className="hover:text-teal-400 transition-colors">Home Page</a></li>
+          <li><a href="#" className="hover:text-teal-400 transition-colors">Features Page</a></li>
+          <li><a href="https://interview-automation-psi.vercel.app/#/Pricings" target="_blank" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
+        </ul>
+      </div>
+
+      {/* Contact Section */}
+      <div>
+        <h2 className="text-white font-bold text-lg mb-4">Contact Us</h2>
+        <p className="text-gray-400">Service Mail: <a href="mailto:nishantsingh.talk@gmail.com" className="hover:text-teal-400 transition-colors">nishantsingh.talk@gmail.com</a></p>
+        <p className="text-gray-400 mt-2">Phone: <a href="tel:+911234567890" className="hover:text-teal-400 transition-colors">+91 12345 67890</a></p>
+      </div>
     </div>
 
-    {/* Quick Links */}
-    <div>
-      <h2 className="text-white font-bold text-lg mb-4">Quick Links</h2>
-      <ul className="space-y-2">
-        <li><a href="#" className="hover:text-teal-400 transition-colors">What's new We provide</a></li>
-        <li><a href="#" className="hover:text-teal-400 transition-colors">Home Page</a></li>
-        <li><a href="#" className="hover:text-teal-400 transition-colors">Features Page</a></li>
-        <li><a href="https://interview-automation-psi.vercel.app/#/Pricings" target="_blank" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
-      </ul>
+    {/* Footer Bottom */}
+    <div className="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
+      © 2025 <a href="https://nishantksingh0.github.io" target="_blank" className="hover:text-teal-400 transition-colors">nishantksingh0.github.io</a> All rights reserved.
     </div>
-
-    {/* Contact Section */}
-    <div>
-      <h2 className="text-white font-bold text-lg mb-4">Contact Us</h2>
-      <p className="text-gray-400">Service Mail: <a href="mailto:nishantsingh.talk@gmail.com" className="hover:text-teal-400 transition-colors">nishantsingh.talk@gmail.com</a></p>
-      <p className="text-gray-400 mt-2">Phone: <a href="tel:+911234567890" className="hover:text-teal-400 transition-colors">+91 12345 67890</a></p>
-    </div>
-  </div>
-
-  {/* Footer Bottom */}
-  <div className="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
-    © 2025 <a href="https://nishantksingh0.github.io" target="_blank" className="hover:text-teal-400 transition-colors">nishantksingh0.github.io</a>. All rights reserved.
-  </div>
-</footer>
+  </footer>
 
 
     </>

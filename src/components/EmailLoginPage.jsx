@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export default function OrgLogin() {
   const navigate = useNavigate();
-  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com
+  const backendURL= import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";    //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com
   const location = useLocation();
   const [Details, setDetails] = useState({email: ""});
   // console.log(location.state?.from, "location.state?.from===Org", location.state?.from==="Org")
@@ -89,7 +89,7 @@ export default function OrgLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-[500px]">
+      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-125">
         <div className="space-y-2">
           <label className="block text-sm font-medium">
             {location.state?.from==="Org"?"Organization Primary Email":"Your Personal Email"}

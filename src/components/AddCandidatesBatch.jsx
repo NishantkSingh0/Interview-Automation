@@ -63,7 +63,7 @@ export default function AddCandidateBatch() {
         {/* Organization's Requirement Section */}
         
           <div className="bg-gray-900 border-2 border-gray-500 p-4 rounded-md mb-6">
-            <h2 className="text-lg font-bold mb-3 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
+            <h2 className="text-lg font-bold mb-3 bg-linear-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Organization's Requirement
             </h2>
             <textarea
@@ -77,7 +77,7 @@ export default function AddCandidateBatch() {
         {/* Candidate Email Section */}
         
           <div className="bg-gray-900 border-2 border-gray-500 p-4 rounded-md mb-4">
-            <h2 className="text-lg font-bold mb-3 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">Candidate's Email</h2>
+            <h2 className="text-lg font-bold mb-3 bg-linear-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">Candidate's Email</h2>
             {emails.map((email, index) => (
               <div key={index} className="mb-4">
                 <label className="block text-blue-300 mb-1">

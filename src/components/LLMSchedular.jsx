@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ScreenWarning from './NoMob.jsx';
 import { useLocation } from "react-router-dom";
-import {RotateCw, Pause, Mic, MicOff, SkipForward,Circle } from 'lucide-react';
+import {RotateCw, Pause, Mic, MicOff, SkipForward } from 'lucide-react';
 import toast from "react-hot-toast";
 
 const ScheduleInterview = () => {
-  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
+  const backendURL= import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
   // Hardcoded JSON data
   const initialData = {
     resume: "SGVsbG8gV29ybGQhIFRoaXMgaXMgYSBzYW1wbGUgcmVzdW1lIGluIEJhc2U2NC4=", // "Hello World! This is a sample resume in Base64."

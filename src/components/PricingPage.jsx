@@ -44,7 +44,7 @@ export default function PricingPage({ initialData }) {
           <button
             onClick={() => setIsStudent(false)}
             className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 ${
-              !isStudent ? "bg-gradient-to-r from-blue-500 to-green-400 text-white" : "text-gray-400"
+              !isStudent ? "bg-linear-to-r from-blue-500 to-green-400 text-white" : "text-gray-400"
             }`}
           >
             Organization
@@ -52,7 +52,7 @@ export default function PricingPage({ initialData }) {
           <button
             onClick={() => setIsStudent(true)}
             className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 ${
-              isStudent ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white" : "text-gray-400"
+              isStudent ? "bg-linear-to-r from-purple-600 to-pink-600 text-white" : "text-gray-400"
             }`}
           >
             Student
@@ -73,7 +73,7 @@ export default function PricingPage({ initialData }) {
               className={`rounded-2xl shadow-lg px-6 ${CARD_VERTICAL_PADDING} flex flex-col items-center transition-all duration-300 border ${CARD_WIDTH} ${
                 isSelected
                   ? `${plan.Gradient} -translate-y-10 text-white z-30 shadow-2xl`
-                  : "bg-gray-900 border-gray-700 text-gray-200 hover:-translate-y-10 hover:shadow-purple-500/30 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600"
+                  : "bg-gray-900 border-gray-700 text-gray-200 hover:-translate-y-10 hover:shadow-purple-500/30 hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600"
               }`}
             >
               <h3 className={`text-lg font-semibold mb-3 ${isSelected ? "text-white" : "text-gray-200"}`}>{plan.title}</h3>

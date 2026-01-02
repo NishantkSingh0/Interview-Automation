@@ -10,13 +10,13 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
 export default function StudentLogin() {
-  const backendURL="https://interview-automation.onrender.com"     //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
+  const backendURL=import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";    //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
   // if (window.innerWidth < 1024) {
   //   return <ScreenWarning />;  // Smaller screens not allowed
   // }
   const location = useLocation();
   const [formData, setFormData] = useState({
-      StudentMail : "",
+      StudentMail : "nishantsingh.talk@gmail.com",
       StudentName : "",
       Tokens : 0,
       ExpectedPosition : "",
@@ -148,7 +148,7 @@ export default function StudentLogin() {
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-lg w-[510px] m-6">
+      <div className="bg-gray-800 p-8 rounded-2xl shadow-lg w-127.5 m-6">
         <h2 className="text-2xl font-bold mb-6 text-center">Student Login</h2>
 
         <form className="space-y-4" onSubmit={handleNext}>
