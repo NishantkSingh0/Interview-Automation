@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ScreenWarning from './NoMob.jsx';
+import ScreenWarning from './Others/NoMob.jsx';
 import { Camera, CheckCircle, ArrowRight, Video, VideoOff } from 'lucide-react';
 
 const InterviewRulesPage = () => {

@@ -43,7 +43,7 @@ export default function OrgLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${backendURL}/create-org/`, {
+      const response = await fetch(`${backendURL}/org/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

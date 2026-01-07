@@ -19,6 +19,7 @@ def ParseResumes(request):
     print("Request made (ParseResumes)")
     file = request.FILES.get("Resume")
     if not file:
+        print("ParseResumes called.. Status: No file provided")
         return Response({"error": "No file provided"}, status=400)
     try:
         # Read PDF content directly from memory

@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import Suggestions from "./Suggestions.jsx";
 import { Upload, FileText } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import ScreenWarning from './NoMob.jsx';
+import ScreenWarning from './Others/NoMob.jsx';
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // import { auth } from "../firebase.js";
 
 
@@ -119,7 +119,7 @@ export default function StudentLogin() {
     }
     setLoading(true);
     try {
-      const response = await fetch(`${backendURL}/create-student/`, {
+      const response = await fetch(`${backendURL}/std/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

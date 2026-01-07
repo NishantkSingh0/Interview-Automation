@@ -1,7 +1,8 @@
-"""VeloraAi URL Configuration
+"""
+URL configuration for Backend project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views as v
+
 
 urlpatterns = [
+    path('', v.wakeup),
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),   # 👈 include your app urls
+    path('ParseResumes/', v.ParseResumes),
+    path('tts/', v.tts),
+    path('stt/', v.stt),
+    path('qns/', v.generate_questions),
+    path('org/',include('Organizations.urls')),
+    path('std/',include('Student.urls'))
 ]

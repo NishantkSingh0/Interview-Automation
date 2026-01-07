@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Upload, FileText } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
-import ScreenWarning from './NoMob.jsx';
+import ScreenWarning from './Others/NoMob.jsx';
 import toast from "react-hot-toast";
 
 export default function CandidateLogin() {

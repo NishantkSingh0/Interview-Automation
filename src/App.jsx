@@ -1,18 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Toaster } from "react-hot-toast";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from "./components/practice.jsx";
+import LoginPage from "./components/Others/practice.jsx";
 import StudentLogin from "./components/studentLogin.jsx";
 import OrgLogin from "./components/OrgLogin.jsx";
 import CandidateLogin from "./components/candLogin.jsx";
 import Animate from "./components/AnimatePages.jsx"
-import LoginUi from "./components/LoginPage.jsx";
 import OrgDashboard from './components/OrgDashboard.jsx';
 import EmailValidation from './components/EmailLoginPage.jsx';
 import HomePage from './components/HomePage.jsx';
 import WhatNew from './components/WhatsNew.jsx';
-import ScreenWarning from './components/NoMob.jsx';
+import ScreenWarning from './components/Others/NoMob.jsx';
 import ScheduleInterview from "./components/LLMSchedular.jsx";
 import InterviewRulesPage from "./components/RulesPage.jsx";
 import AddCandidateBatch from "./components/AddCandidatesBatch.jsx";
@@ -24,6 +23,13 @@ import ExamPage from "./components/ExamPage.jsx";
 
 
 function App() {
+  const backendURL=import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";   
+  
+  // Wakeup
+  useEffect(() => {
+      fetch(`${backendURL}/`)
+        .catch(() => {});
+  }, [backendURL]);
 
   return (
     // <>

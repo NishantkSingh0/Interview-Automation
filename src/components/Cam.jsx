@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ScreenWarning from "./NoMob.jsx";
+import ScreenWarning from "./Others/NoMob.jsx";
 
 const PreInterviewCheck = () => {
   const [cameraVerified, setCameraVerified] = useState(false);

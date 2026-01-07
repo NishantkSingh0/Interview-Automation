@@ -29,7 +29,7 @@ export default function OrgLogin() {
 
     if (location.state?.from==="Org"){
       try {
-        const response = await fetch(`${backendURL}/get-organization/`, {
+        const response = await fetch(`${backendURL}/org/get/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function OrgLogin() {
     }
     else{
       try {
-        const response = await fetch(`${backendURL}/get-student/`, {
+        const response = await fetch(`${backendURL}/std/get/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

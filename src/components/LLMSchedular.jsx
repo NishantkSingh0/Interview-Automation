@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ScreenWarning from './NoMob.jsx';
+import ScreenWarning from './Others/NoMob.jsx';
 import { useLocation } from "react-router-dom";
 import {RotateCw, Pause, Mic, MicOff, SkipForward } from 'lucide-react';
 import toast from "react-hot-toast";
