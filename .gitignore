@@ -3,4 +3,3 @@ node_modules
 *private.txt
 *.env
 *__pycache__
-dist/
