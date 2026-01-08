@@ -88,46 +88,70 @@ export default function OrgLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-125">
-        <div className="space-y-2">
-          <label className="block text-sm font-medium">
-            {location.state?.from==="Org"?"Organization Primary Email":"Your Personal Email"}
-          </label>
-            <input
-              type="text"
-              name="email"
-              placeholder="admin@example.com"
-              className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
-              value={Details.email}
-              onChange={handleChange} // updates as user types
-              onBlur={(e) => {
-                const val = e.target.value;
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-              
-                if (val && !emailRegex.test(val)) {
-                  toast.error("Enter a valid Gmail address (example@gmail.com)");
-                  setDetails({ ...Details, email: "" }); // clear invalid email
-                }
-              }}
-            />
-          <div className="ml-4 w-0 h-1 rounded-full bg-blue-500 transition-all duration-300 peer-hover:w-[60%] peer-focus:w-[88%] sm:peer-focus:w-[94%]"></div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 text-white px-4">
+
+      <div className="w-full max-w-md bg-gray-900/90 backdrop-blur border border-gray-800 rounded-2xl shadow-2xl p-8">
+
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-indigo-400">
+            {location.state?.from === "Org" ? "Organization Login" : "Student Login"}
+          </h1>
+          <p className="text-sm text-gray-400 mt-2">
+            {location.state?.from === "Org"
+              ? "Access your organization dashboard"
+              : "Access your interview dashboard"}
+          </p>
         </div>
-            <button
-              onClick={handleNext}
-              disabled={loading}
-              className={`w-full mt-6 py-3 rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-2 ${
-                loading
-                  ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              {loading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              ) : (
-                "Next"
-              )}
-            </button>
+
+        {/* Input */}
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-gray-300">
+            {location.state?.from === "Org"
+              ? "Organization Primary Email"
+              : "Your Personal Email"}
+          </label>
+
+          <input
+            type="text"
+            name="email"
+            placeholder="example@gmail.com"
+            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+            value={Details.email}
+            onChange={handleChange}
+            onBlur={(e) => {
+              const val = e.target.value;
+              const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+              if (val && !emailRegex.test(val)) {
+                toast.error("Enter a valid Gmail address (example@gmail.com)");
+                setDetails({ ...Details, email: "" });
+              }
+            }}
+          />
+        </div>
+
+        {/* Button */}
+        <button
+          onClick={handleNext}
+          disabled={loading}
+          className={`w-full mt-8 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
+            loading
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98]"
+          }`}
+        >
+          {loading ? (
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            "Continue"
+          )}
+        </button>
+
+        {/* Footer hint */}
+        <p className="text-xs text-gray-500 text-center mt-6">
+          We'll Check if you are already registered
+        </p>
       </div>
     </div>
   );

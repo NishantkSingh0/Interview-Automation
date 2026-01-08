@@ -14,18 +14,18 @@ export default function PricingPage({ initialData }) {
 
   // Organization Plans
   const orgPlans = [
-    { id: 1, title: "Essential", price: 119, Tokens: 5, CostingRatio: 24, Gradient: "bg-gradient-to-r from-gray-500 to-blue-gray-700 border-4 border-gray-600" },
-    { id: 2, title: "Deluxe", price: 349, Tokens: 18, CostingRatio: 19, Gradient: "bg-gradient-to-r from-blue-500 to-green-400 border-4 border-blue-500" },
-    { id: 3, title: "Premium", price: 476, Tokens: 28, CostingRatio: 17, Gradient: "bg-gradient-to-r from-purple-600 to-pink-600 border-4 border-blue-500" },
-    { id: 4, title: "Most Savings", price: 556, Tokens: 37, CostingRatio: 15, Gradient: "bg-gradient-to-r from-orange-500 to-red-500 border-4 border-orange-500" },
+    { id: 1, title: "Essential", price: 109, Tokens: 5, Gradient: "bg-gradient-to-r from-gray-500 to-blue-gray-700 border-4 border-gray-600" },
+    { id: 2, title: "Deluxe", price: 329, Tokens: 18, Gradient: "bg-gradient-to-r from-blue-500 to-green-400 border-4 border-blue-500" },
+    { id: 3, title: "Premium", price: 476, Tokens: 31, Gradient: "bg-gradient-to-r from-purple-600 to-pink-600 border-4 border-blue-500" },
+    { id: 4, title: "Most Savings", price: 600, Tokens: 50, Gradient: "bg-gradient-to-r from-orange-500 to-red-500 border-4 border-orange-500" },
   ];
 
   // Student Plans
   const studentPlans = [
-    {id: 1, title: "Essential",price: 45,Tokens: 2, CostingRatio: 24, Gradient: "bg-gradient-to-r from-sky-400 to-blue-500 border-4 border-sky-500"},
-    {id: 2, title: "Deluxe", price: 85, Tokens: 4, CostingRatio: 21, Gradient: "bg-gradient-to-r from-emerald-400 to-teal-500 border-4 border-teal-500"},
-    {id: 3, title: "Premium", price: 116, Tokens: 6, CostingRatio: 19, Gradient: "bg-gradient-to-r from-violet-400 to-fuchsia-500 border-4 border-fuchsia-500"},
-    {id: 4, title: "Most Savings", price: 199, Tokens: 13, CostingRatio: 15, Gradient: "bg-gradient-to-r from-amber-400 to-orange-500 border-4 border-amber-500"},
+    {id: 1, title: "Essential",price: 45,Tokens: 2, Gradient: "bg-gradient-to-r from-sky-400 to-blue-500 border-4 border-sky-500"},
+    {id: 2, title: "Deluxe", price: 85, Tokens: 4, Gradient: "bg-gradient-to-r from-emerald-400 to-teal-500 border-4 border-teal-500"},
+    {id: 3, title: "Premium", price: 116, Tokens: 6, Gradient: "bg-gradient-to-r from-violet-400 to-fuchsia-500 border-4 border-fuchsia-500"},
+    {id: 4, title: "Most Savings", price: 199, Tokens: 13, Gradient: "bg-gradient-to-r from-amber-400 to-orange-500 border-4 border-amber-500"},
   ];
 
   const plans = isStudent ? studentPlans : orgPlans;
@@ -84,7 +84,7 @@ export default function PricingPage({ initialData }) {
 
               <ul className={`text-sm space-y-2 mb-6 text-center ${isSelected ? "text-white/90" : "text-gray-300"}`}>
                 <li>{plan.Tokens} Tokens</li>
-                <li>Costs ₹{plan.CostingRatio} per Schedule</li>
+                <li>~ ₹{Math.floor(plan.price / plan.Tokens)} per Schedule</li>
               </ul>
 
               <div className="flex justify-center w-full mt-auto">
@@ -99,7 +99,7 @@ export default function PricingPage({ initialData }) {
           );
         })}
       </div>
-      <div className="mt-10 text-xl">For Collaboritive works and partnership contact us @<a href="mailto::nishantsingh.talk@gmail.com" className="hover:text-teal-400 text-gray-300">nishantsingh.talk@gmail.com</a></div>
+      <div className="mt-10 text-lg">For Collaboritive works and partnership contact us @<a href="mailto::nishantsingh.talk@gmail.com" className="hover:text-teal-400 text-gray-300">nishantsingh.talk@gmail.com</a></div>
     </div>
   );
 }

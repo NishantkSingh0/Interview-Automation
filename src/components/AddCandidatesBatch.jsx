@@ -54,6 +54,9 @@ export default function AddCandidateBatch() {
     setOrgRequirement("");
     setEmails([""]);
     setBatchCount(prev => prev + 1);
+
+    // fjsnfsfmn emails =['',''] location.orgName
+
   };
 
   return (

@@ -71,56 +71,74 @@ export default function OrgLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-125">
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Organization Details
-        </h1>
-          <div className="space-y-2 mb-4">
-              <label className="block text-sm font-medium">Organization Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder='xyz pvt ltd'
-                className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
-                value={orgDetails.name}
-                onChange={handleChange}
-              />
-              <div className="ml-4 w-0 h-1 rounded-full bg-blue-500 transition-all duration-300 peer-hover:w-[60%] peer-focus:w-[88%] sm:peer-focus:w-[94%]"></div>
-          </div>
-          <div className="space-y-2 mb-4">
-              <label className="block text-sm font-medium">Organization Email</label>
-              <input
-                type="text"
-                name="email"
-                placeholder='admin@example.com'
-                className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
-                value={orgDetails.email}
-                onChange={handleChange}
-              />
-              <div className="ml-4 w-0 h-1 rounded-full bg-blue-500 transition-all duration-300 peer-hover:w-[60%] peer-focus:w-[88%] sm:peer-focus:w-[94%]"></div>
-          </div>
-          <div className="mb-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 text-white px-4">
+
+      <div className="w-full max-w-md bg-gray-900/90 backdrop-blur border border-gray-800 rounded-2xl shadow-2xl p-8">
+
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-indigo-400">
+            Organization Setup
+          </h1>
+          <p className="text-sm text-gray-400 mt-2">
+            Create your organization profile to get started
+          </p>
+        </div>
+
+        {/* Form */}
+        <div className="space-y-6">
+
+          {/* Organization Name */}
+          <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
+              Organization Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="XYZ Pvt Ltd"
+              value={orgDetails.name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+            />
+          </div>
+
+          {/* Organization Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Organization Email
+            </label>
+            <input
+              type="text"
+              name="email"
+              placeholder="admin@example.com"
+              value={orgDetails.email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+            />
+          </div>
+
+          {/* Organization Type */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Organization Type
             </label>
-
-            <div className="flex gap-3 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
               {levels.map((org_size) => (
                 <label
                   key={org_size}
-                  className={`px-4 py-2 rounded-2xl cursor-pointer shadow-sm transition-all 
-                    border text-sm font-medium
+                  className={`px-5 py-2 rounded-full cursor-pointer text-sm font-medium transition-all border
                     ${
                       orgDetails.org_size === org_size
-                        ? "bg-blue-500 text-white shadow-md border-blue-600"
-                        : "bg-gray-600 text-white hover:bg-gray-700 border-gray-300"
+                        ? "bg-indigo-600 border-indigo-600 shadow-md"
+                        : "bg-gray-800 border-gray-700 hover:bg-gray-700"
                     }`}
                 >
                   <input
                     type="radio"
-                    name="orgType"
+                    name="org_size"          // ⭐ REQUIRED
                     value={org_size}
+                    checked={orgDetails.org_size === org_size}
                     onChange={handleRadioChange}
                     className="hidden"
                   />
@@ -129,21 +147,24 @@ export default function OrgLogin() {
               ))}
             </div>
           </div>
-        <button
-          onClick={handleNext}
-          disabled={loading}
-          className={`w-full mt-6 py-3 rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-2 ${
-            loading
-              ? "bg-gray-500 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {loading ? (
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          ) : (
-            "Next"
-          )}
-        </button>
+
+          {/* Submit */}
+          <button
+            onClick={handleNext}
+            disabled={loading}
+            className={`w-full mt-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
+              loading
+                ? "bg-gray-600 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98]"
+            }`}
+          >
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            ) : (
+              "Continue"
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
