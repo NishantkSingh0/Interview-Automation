@@ -29,12 +29,11 @@ def create_org(request):
     if Organization.objects.filter(email=email).exists():
         print("creat_org called.. Status: exists")
         return Response({"status": "exists"}, status=200)
-
     org = Organization.objects.create(
         email=email,
         name=request.data.get("name", ""),
         tokens=int(request.data.get("tokens", 0)),
-        org_size=request.data.get("org_size", "")
+        org_size=request.data.get("org_size","")
     )
     print("creat_org called.. Status: created")
     return Response({"status": "created", "id": org.id}, status=201)
@@ -58,9 +57,9 @@ def update_tokens(request):
 @api_view(['PUT'])
 def update_batch(request):
     email = request.data.get("email")
-    cand_names = request.data.get("CandNames", [])
-    cand_resumes = request.data.get("ResumeInfos", [])
-    cand_scores = request.data.get("CandScores", [])
+    cand_names = request.data.get("cand_names", [])
+    cand_resumes = request.data.get("resume_infos", [])
+    cand_scores = request.data.get("cand_scores", [])
 
     try:
         org = Organization.objects.get(email=email)
