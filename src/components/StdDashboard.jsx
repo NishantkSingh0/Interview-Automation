@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Menu } from 'lucide-react';
+import { User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const StdDashboard = () => {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedBatch, setSelectedBatch] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-
+  console.log("Received Data",location)
   // ✅ Sample backend-style JSON test data
   const candNames = [
     ['Alice Johnson', 'Bob Smith', 'Charlie Brown', 'Charlie Brown'],
@@ -60,6 +60,10 @@ const StdDashboard = () => {
   const batches = candNames;
 
   const HandleScheduleInterview = () => {
+    navigate('/verification', { state: location.state })  // Pass existing state to the next page;
+  };
+  
+  const HandleAbout = () => {
     navigate('/Student', { state: location.state })  // Pass existing state to the next page;
   };
 
@@ -68,14 +72,15 @@ const StdDashboard = () => {
       {/* Sidebar */}
       <div
         className={`${menuOpen ? 'w-56' : 'w-16'} bg-gray-900 p-4 transition-all duration-300 flex flex-col fixed top-0 left-0 h-full shadow-lg`}
-      >
+        onMouseEnter={() => {if (!menuOpen) setMenuOpen(true);}}   onMouseLeave={() => {if (menuOpen) setMenuOpen(false);}}>
         {/* Menu Icon shifted to the left */}
         <div className="flex items-center justify-start mb-6 border-b border-gray-800 pb-3">
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-white cursor-pointer hover:text-indigo-400 focus:outline-none ml-0"
+            title='Schedule a interview'
+            onClick={HandleAbout}
+            className={`w-full text-center bg-gray-600 hover:bg-indigo-700 ${menuOpen?`px-2 md:px-4`:`px-0 md:px-2`} py-2 rounded-lg transition-all text-sm font-medium truncate`}
           >
-            <Menu size={26} />
+            {menuOpen?<div className="flex items-center"><User className="mr-2" size={16}/> <span className="leading-none">{location.state.StudentName}</span></div>:<User size={16}/>}
           </button>
         </div>
 
@@ -102,7 +107,7 @@ const StdDashboard = () => {
             onClick={HandleScheduleInterview}
             className={`w-full text-center bg-indigo-600 hover:bg-indigo-700 ${menuOpen?`px-2 md:px-4`:`px-0 md:px-2`} py-2 rounded-lg transition-all text-sm font-medium truncate`}
           >
-            {menuOpen?`Schedule Interview`:`>`}
+            {menuOpen?`Schedule Interview`:`+`}
           </button>
         </div>
       </div>

@@ -8,19 +8,19 @@ export default function OrgLogin() {
   const location = useLocation();
   const levels=["Startup", "Growing", "Mature", "Enterprise"]
   const [orgDetails, setOrgDetails] = useState({
-    Email: "",
-    Name: "",
-    Tokens: 0,
-    OrgSize: "",
-    CandNames: ['None'],
-    CandScores: ['None'],
-    ResumeInfos: ['None'],
+    email: "",
+    name: "",
+    tokens: 0,
+    org_size: "",
+    cand_names: ['None'],
+    cand_scores: ['None'],
+    resume_infos: ['None'],
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (location.state?.email) {
-      setOrgDetails((prev) => ({ ...prev, Email: location.state.email }));
+      setOrgDetails((prev) => ({ ...prev, email: location.state.email }));
     }
   }, [location.state?.email]);
 
@@ -29,11 +29,11 @@ export default function OrgLogin() {
   };
 
   const handleRadioChange = (e) => {
-    setOrgDetails({ ...orgDetails, OrgSize: e.target.value });
+    setOrgDetails({ ...orgDetails, org_size: e.target.value });
   };
 
   const handleNext = async () => {
-    if (!orgDetails.Name || !orgDetails.Email || !orgDetails.OrgSize) {
+    if (!orgDetails.name || !orgDetails.email || !orgDetails.org_size) {
       toast.error("Please fill all fields.. Before proceeding further");
       return;
     }
@@ -80,10 +80,10 @@ export default function OrgLogin() {
               <label className="block text-sm font-medium">Organization Name</label>
               <input
                 type="text"
-                name="Name"
+                name="name"
                 placeholder='xyz pvt ltd'
                 className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
-                value={orgDetails.Name}
+                value={orgDetails.name}
                 onChange={handleChange}
               />
               <div className="ml-4 w-0 h-1 rounded-full bg-blue-500 transition-all duration-300 peer-hover:w-[60%] peer-focus:w-[88%] sm:peer-focus:w-[94%]"></div>
@@ -92,10 +92,10 @@ export default function OrgLogin() {
               <label className="block text-sm font-medium">Organization Email</label>
               <input
                 type="text"
-                name="Email"
+                name="email"
                 placeholder='admin@example.com'
                 className="w-full sm:px-6 sm:p-2 border rounded peer px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-600"
-                value={orgDetails.Email}
+                value={orgDetails.email}
                 onChange={handleChange}
               />
               <div className="ml-4 w-0 h-1 rounded-full bg-blue-500 transition-all duration-300 peer-hover:w-[60%] peer-focus:w-[88%] sm:peer-focus:w-[94%]"></div>
@@ -106,13 +106,13 @@ export default function OrgLogin() {
             </label>
 
             <div className="flex gap-3 justify-center">
-              {levels.map((OrgSize) => (
+              {levels.map((org_size) => (
                 <label
-                  key={OrgSize}
+                  key={org_size}
                   className={`px-4 py-2 rounded-2xl cursor-pointer shadow-sm transition-all 
                     border text-sm font-medium
                     ${
-                      orgDetails.OrgSize === OrgSize
+                      orgDetails.org_size === org_size
                         ? "bg-blue-500 text-white shadow-md border-blue-600"
                         : "bg-gray-600 text-white hover:bg-gray-700 border-gray-300"
                     }`}
@@ -120,11 +120,11 @@ export default function OrgLogin() {
                   <input
                     type="radio"
                     name="orgType"
-                    value={OrgSize}
+                    value={org_size}
                     onChange={handleRadioChange}
                     className="hidden"
                   />
-                  {OrgSize}
+                  {org_size}
                 </label>
               ))}
             </div>

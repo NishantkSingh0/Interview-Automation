@@ -99,6 +99,7 @@ export default function PricingPage({ initialData }) {
           );
         })}
       </div>
+      <div className="mt-10 text-xl">For Collaboritive works and partnership contact us @<a href="mailto::nishantsingh.talk@gmail.com" className="hover:text-teal-400 text-gray-300">nishantsingh.talk@gmail.com</a></div>
     </div>
   );
 }

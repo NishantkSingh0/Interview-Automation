@@ -49,7 +49,7 @@ export default function CandidateLogin() {
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
-      <div className="bg-gray-800 p-6 m-6 rounded-2xl shadow-lg w-[500px]">
+      <div className="bg-gray-800 p-6 m-6 rounded-2xl shadow-lg w-125">
         <h2 className="text-2xl font-bold mb-6 text-center">Candidate Login</h2>
 
         <form className="space-y-2" onSubmit={handleNext}>
