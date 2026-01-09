@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
-import { Building  } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Building, Circle } from 'lucide-react';
+import axios from "axios";
+import toast from "react-hot-toast";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const OrgDashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedBatch, setSelectedBatch] = useState(0);
-  const [IsAbout, setIsAbout] = useState(false);
+  const [IsAbout, setIsAbout] = useState(false);  
+  const [IsLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  
+  useEffect(() => {
+    // if no state OR empty state
+    console.log("Inside UseEffect: ",location)
+    if (!location.state || Object.keys(location.state).length === 0) {
+      navigate("/", { replace: true });
+    }
+  }, [location, navigate]);
+
   const [orgData, setOrgData] = useState({
     name: location.state?.name || "",
     email: location.state?.email || "",
-    org_size: location.state?.org_size || ""
+    org_size: location.state?.org_size || "",
+    Type: "org"
   });
+  const backendURL=import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";    //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
   console.log("Received: ",location)
   // ✅ Sample backend-style JSON test data
   const candNames = [
@@ -68,9 +82,27 @@ const OrgDashboard = () => {
   const handleAddBatch = () => {
     navigate('/Organization/Add_Candidates');
   };
-  
-  const HandleUpdate = () => {
-    navigate('/Organization/Add_Candidates');
+
+  const HandleUpdate = async (e) => {
+    try {
+      setIsLoading(true)
+      const res = await axios.put(
+        `${backendURL}/org/update-Info/`,
+        orgData
+      );
+
+      if (res.data.status === "updated") {
+        // 🔁 Reassign state from backend
+        setOrgData(res.data.data);
+
+        toast.success("Organization info updated");
+      }
+    } catch (err) {
+      toast.error("Updation failed");
+      console.error(err);
+    }finally{
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -81,13 +113,13 @@ const OrgDashboard = () => {
         onMouseEnter={() => {if (!menuOpen) setMenuOpen(true);}}   onMouseLeave={() => {if (menuOpen) setMenuOpen(false);}}>
       
         {/* About Menu */}
-        <div className="flex items-center justify-start mb-6 border-b border-gray-800 pb-3">
+        <div className="flex items-center justify-start mb-6 border-b border-gray-700 pb-3">
           <button
             title='About Organization'
             onClick={() => setIsAbout(true)}
-            className={`w-full text-center bg-gray-600 hover:bg-indigo-700 ${IsAbout?`bg-indigo-700`:``} ${menuOpen?`px-2 md:px-4`:`px-0 md:px-2`} py-2 rounded-lg transition-all text-sm font-medium truncate`}
+            className={`w-full text-center bg-gray-800/50 hover:bg-indigo-700 ${IsAbout?`bg-indigo-700`:``} ${menuOpen?`px-2 md:px-4`:`px-0 md:px-2`} py-2 rounded-lg transition-all text-sm font-medium truncate`}
           >
-            {menuOpen?<div className="flex items-center"><Building  className="mr-2" size={16}/> <span className="leading-none">{location.state.name}</span></div>:<Building  size={16}/>}
+            {menuOpen?<div className="flex items-center"><Building  className="mr-2" size={16}/> <span className="leading-none">{location.state.name?.slice(0, 20)}</span></div>:<Building  size={16}/>}
           </button>
         </div>
 
@@ -101,7 +133,7 @@ const OrgDashboard = () => {
                 setIsAbout(false);
               }}
               className={`w-full text-left ${menuOpen?`px-2 md:px-4`:`px-1 md:px-3`} py-2 rounded-lg text-sm transition-all duration-200 hover:bg-gray-800 focus:outline-none truncate ${
-                selectedBatch === index && !IsAbout ? 'bg-indigo-700 text-white' : 'bg-gray-900 text-gray-300'
+                selectedBatch === index && !IsAbout ? 'bg-indigo-700 text-white' : 'bg-gray-800/50 text-gray-300'
               }`}
             >
               {menuOpen?`Batch ${index + 1}`:`${index + 1}`}
@@ -110,7 +142,7 @@ const OrgDashboard = () => {
         </div>
 
         {/* Add Batch Button */}
-        <div className="mt-4 border-t border-gray-800 cursor-pointer pt-3">
+        <div className="mt-4 border-t border-gray-700 cursor-pointer pt-3">
           <button
             title='Schedule a interview'
             onClick={handleAddBatch}
@@ -162,13 +194,28 @@ const OrgDashboard = () => {
         <div className="w-full max-w-4xl">
 
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-semibold text-indigo-400 tracking-wide">
-              Welcome,
-            </h1>
-            <p className="text-sm text-gray-400 mt-1">
-              View and update your organization information
-            </p>
+          <div className="mb-8 flex items-center justify-between">
+            {/* Left side */}
+            <div>
+              <h1 className="text-3xl font-semibold text-indigo-400 tracking-wide">
+                Welcome,
+              </h1>
+              <p className="text-sm text-gray-400 mt-1">
+                View and update your Organization information
+              </p>
+            </div>
+
+            {/* Right side */}
+            <div onClick={() => navigate("/Pricings",{state:orgData})} className="flex items-center gap-3 cursor-pointer bg-gray-800 px-2 py-1 border-0 rounded-lg" title={location.state?.tokens===0?`You can't Schedule any interview right now.. Click to Recharge now`:'Click to Add More'}>
+              <p className="text-gray-300">
+                {location.state?.tokens}
+              </p>
+              <img
+                src="./Logo.png"   // or import tokenImg from "../assets/token.png"
+                alt="Tokens"
+                className="w-5 h-5"
+              />
+            </div>
           </div>
       
           {/* Card */}
@@ -193,15 +240,11 @@ const OrgDashboard = () => {
                 
               {/* Email */}
               <div>
-                <label className="block text-sm text-gray-400 mb-1">
-                  Email
-                </label>
+                <label title="Email is a primary key of DB, So Can't changed" className="flex items-center text-sm text-gray-400 mb-1">Email <span><Circle fill="orange" stroke="orange" size={8} className='ml-2'/></span></label>
                 <input
                   type="email"
                   value={orgData.email}
-                  onChange={(e) =>
-                    setOrgData({ ...orgData, email: e.target.value })
-                  }
+                  readOnly
                   className="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-indigo-500"
                 />
               </div>
@@ -228,7 +271,11 @@ const OrgDashboard = () => {
                 onClick={HandleUpdate}
                 className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors text-sm font-medium"
               >
-                Update Organization
+              {IsLoading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              ) : (
+                "Update Info"
+              )}
               </button>
             </div>
           </div>

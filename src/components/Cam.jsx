@@ -112,26 +112,37 @@ const PreInterviewCheck = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 p-6">
-      <div className="flex flex-col lg:flex-row bg-gray-800 shadow-blue-700 border-b-gray-950 text-amber-50 shadow-lg rounded-lg w-full max-w-6xl overflow-hidden">
-        {/* Left Section: Camera & Mic Test */}
+      <div className="flex flex-col lg:flex-row bg-gray-900/80 backdrop-blur border border-gray-700 shadow-2xl rounded-2xl w-full max-w-6xl overflow-hidden">        {/* Left Section: Camera & Mic Test */}
         <div className="w-full lg:w-[40%] p-6 space-y-6 ">
           {/* Camera Test */}
           <div>
             <h2 className="text-lg text-gray-200 font-semibold">Camera Test</h2>
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              muted
-              className="w-full h-48 rounded-md border mt-2 bg-black object-cover"
-            />
+            <div className="relative">
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="w-full h-52 rounded-xl border border-gray-700 bg-black object-cover"
+              />
+            
+              <span
+                className={`absolute top-2 right-2 px-3 py-1 text-xs rounded-full font-semibold
+                  ${cameraVerified ? "bg-green-600 text-white" : "bg-red-600 text-white"}`}
+              >
+                {cameraVerified ? "Camera Ready" : "Camera Off"}
+              </span>
+            </div>
             <button
               onClick={verifyCamera}
-              className="mt-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600"
+              className="mt-3 w-full px-4 py-2 rounded-lg
+                         bg-linear-to-r from-purple-600 to-indigo-600
+                         hover:from-purple-700 hover:to-indigo-700
+                         transition font-semibold"
             >
-              Access Camera
+              {cameraVerified ? "Recheck Camera" : "Enable Camera"}
             </button>
-            <p className="mt-2">
+            <p className="mt-2 text-gray-200">
               {cameraVerified ? "✅ Camera working" : "❌ Camera not detected"}
             </p>
           </div>
@@ -146,16 +157,15 @@ const PreInterviewCheck = () => {
             >
               Test Microphone
             </button>
-
-            <div className="w-full h-2 bg-gray-600 rounded mt-2">
+            <div className="w-full h-3 bg-gray-700 rounded-full mt-3 overflow-hidden">
               <div
-                className="h-2 bg-green-500 rounded transition-all"
+                className="h-3 bg-linear-to-r from-green-400 to-emerald-500
+                           transition-all duration-100"
                 style={{ width: `${Math.min(micVolume * 3, 100)}%` }}
-              ></div>
+              />
             </div>
-
-            <p className="mt-2">
-              {micVerified ? "✅ Microphone working" : "❌ Speak to test mic"}
+            <p className="mt-2 text-sm text-gray-200">
+              {micVerified ? "🎤 Microphone active" : "🎤 Speak to test microphone"}
             </p>
           </div>
 
@@ -163,29 +173,29 @@ const PreInterviewCheck = () => {
           <button
             onClick={handleStartInterview}
             disabled={!(cameraVerified && micVerified)}
-            className={`w-full px-4 py-2 rounded-lg mt-4 ${
-              cameraVerified && micVerified
-                ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-amber-800 text-gray-200 cursor-not-allowed"
-            }`}
+            className={`w-full mt-6 py-3 rounded-xl text-lg font-semibold transition
+              ${
+                cameraVerified && micVerified
+                  ? "bg-linear-to-r from-green-500 to-emerald-600 hover:scale-[1.02]"
+                  : "bg-gray-700 text-gray-400 cursor-not-allowed"
+              }`}
           >
-            Start Interview
+            Start Interview →
           </button>
-
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
 
         {/* Right Section */}
         <div className="w-full lg:w-[60%] bg-gray-900/50 p-8 flex flex-col justify-center">
-          <h1 className="text-4xl font-bold text-gray-200 mb-4">
-            Camera & Mic Access
+          <h1 className="text-4xl font-extrabold bg-linear-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent mb-6">
+            Camera & Mic Verification
           </h1>
           <div className="text-gray-200 space-y-4">
             <p>
               Velora.ai requires access to your camera and microphone to deliver
               a seamless and interactive interview experience.
             </p>
-            <div className="bg-gray-700 p-4 rounded-lg">
+            <div className="bg-gray-800/70 border border-gray-700 p-5 rounded-xl">
               <h3 className="font-semibold mb-2">Interview Guidelines</h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Make sure your camera is positioned at eye level.</li>

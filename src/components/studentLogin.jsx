@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Suggestions from "./Suggestions.jsx";
-import { Upload, FileText } from "lucide-react";
+// import Suggestions from "./Suggestions.jsx";
+import { Upload, FileText, Trash } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import ScreenWarning from './Others/NoMob.jsx';
+// import ScreenWarning from './Others/NoMob.jsx';
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 // import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -14,9 +14,19 @@ export default function StudentLogin() {
   // if (window.innerWidth < 1024) {
   //   return <ScreenWarning />;  // Smaller screens not allowed
   // }
+  const navigate=useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // if no state OR empty state -> Return to Home
+    console.log("Inside UseEffect: ",location)
+    if (!location.state?.email) {
+      navigate("/", { replace: true });
+    }
+  }, [location, navigate]);
+
   const [formData, setFormData] = useState({
-      StudentMail : "nishantsingh.talk@gmail.com",
+      StudentMail : location.state?.email,
       StudentName : "",
       Tokens : 0,
       ExpectedPosition : "",
@@ -29,7 +39,6 @@ export default function StudentLogin() {
   const [loading, setLoading] = useState(false);
 
   const levels=["Beginner","I", "II", "III", "Advanced"]
-  const navigate=useNavigate();
 
   useEffect(() => {
     console.log("Location state received:", location.state);
@@ -48,10 +57,6 @@ export default function StudentLogin() {
     location.state?.StudentName,
     location.state?.ExpectedPosition,
   ]);
-
-  const handleSelectChange = (val) => {
-    setFormData({ ...formData, Designation: val });
-  };
 
   const handleRadioChange = (e) => {
     setFormData({ ...formData, ExpectedPosition: e.target.value });
@@ -110,7 +115,7 @@ export default function StudentLogin() {
     toast.error("Authentication Login script is not managed")
   };
 
-  const handleNext = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
     if (!formData.StudentMail || !formData.StudentName || !formData.Designation || !formData.ExpectedPosition || !formData.Resume) { //  !formData.username || !formData.password ||
@@ -161,17 +166,21 @@ export default function StudentLogin() {
           </p>
         </div>
 
-        <form className="space-y-8" onSubmit={handleNext}>
+        <form className="space-y-8" onSubmit={handleSubmit}>
 
           {/* DESIGNATION */}
-          <div>
-            <Suggestions
-              label="Designation"
-              placeholder="Search your designation..."
+          <div>          
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Designation
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Designation"
               value={formData.Designation}
-              onChange={(val) => handleSelectChange(val)}
-              // suggestions={/* unchanged list */}
-              isMultiSuggestion={false}
+              onChange={(e) =>
+                setFormData({ ...formData, Designation: e.target.value })
+              }
+              className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
@@ -265,7 +274,7 @@ export default function StudentLogin() {
                   onClick={() => setFormData({ ...formData, Resume: "" })}
                   className="ml-auto text-red-400 hover:text-red-500 text-sm"
                 >
-                  Remove
+                  <Trash/>
                 </button>
               </div>
             )}

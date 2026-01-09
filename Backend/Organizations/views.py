@@ -1,6 +1,7 @@
 # API/views.py
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 from .models import Organization, Candidate, CandidateScore
 
 # Check if organization exists
@@ -38,11 +39,50 @@ def create_org(request):
     print("creat_org called.. Status: created")
     return Response({"status": "created", "id": org.id}, status=201)
 
+# Update Org Details
+@api_view(['PUT'])
+def update_org(request):
+    email = request.data.get("email")
+
+    if not email:
+        return Response(
+            {"status": "email_required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        org = Organization.objects.get(email=email)
+    except Organization.DoesNotExist:
+        return Response(
+            {"status": "not_found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    # Update only provided fields
+    org.name = request.data.get("name", org.name)
+    org.org_size = request.data.get("org_size", org.org_size)
+
+    org.save()
+
+    print("update_org called.. Status: updated")
+    return Response(
+        {
+            "status": "updated",
+            "data": {
+                "email": org.email,
+                "name": org.name,
+                "org_size": org.org_size,
+            }
+        },
+        status=status.HTTP_200_OK
+    )
+
+
 # Update token count (+ or -)
 @api_view(['PUT'])
 def update_tokens(request):
     email = request.data.get("email")
-    tokens = int(request.data.get("tokens", 0))
+    tokens = int(request.data.get("TokensToAdd", 0))
     try:
         org = Organization.objects.get(email=email)
         org.tokens += tokens

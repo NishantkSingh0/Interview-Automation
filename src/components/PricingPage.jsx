@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function PricingPage({ initialData }) {
+  
+  const [IsLocation, setIsLocation] = useState(false);
   const [selected, setSelected] = useState(null);
   const [isStudent, setIsStudent] = useState(true); // toggle between Student & Organization
-
+  const location = useLocation();  
+  const [IsLoading, setIsLoading] = useState(false);
+  
+  const navigate = useNavigate();
   const CARD_VERTICAL_PADDING = "py-20";
   const CARD_WIDTH = "w-72 md:w-56";
   const CARD_GAP = "gap-2 md:gap-4";
-
+  const type = location.state?.Type || "";
   // JSON batch state (tokens)
   const defaultBatch = { Type: "batchA", Tokens: 0, id: "batch123" };
   const [batchData, setBatchData] = useState(initialData || defaultBatch);
-
+  
+  const backendURL=import.meta.env.VITE_BACKEND_URL || "https://interview-automation.onrender.com";    //    http://127.0.0.1:8000   --   https://interview-automation.onrender.com 
+  
+  const [PricingData, setPricingData] = useState({
+    name: location.state?.name || "",
+    email: location.state?.email || "",
+    TokensToAdd: 0
+  });
+  
   // Organization Plans
   const orgPlans = [
     { id: 1, title: "Essential", price: 109, Tokens: 5, Gradient: "bg-gradient-to-r from-gray-500 to-blue-gray-700 border-4 border-gray-600" },
@@ -29,11 +45,38 @@ export default function PricingPage({ initialData }) {
   ];
 
   const plans = isStudent ? studentPlans : orgPlans;
+  
+  useEffect(() => {
+    // if no state OR empty state
+    console.log("Inside UseEffect: ",location)
+    if (type && type==='std'){
+      setIsStudent(true)
+    }else{
+      setIsStudent(false)
+    }
+    if (location.state && Object.keys(location.state).length !== 0) {
+      setIsLocation(true);
+    }
+  }, [location, navigate]);
 
-  const handlePurchase = (tokensToAdd) => {
-    const updated = { ...batchData, Tokens: batchData.Tokens + tokensToAdd };
-    setBatchData(updated);
-    console.log("Updated batchData:", updated);
+  const handlePurchase = async (tokensToAdd) => {
+    try {
+      setIsLoading(true)
+      setPricingData({...PricingData, TokensToAdd: tokensToAdd})
+      const res = await axios.put(
+        `${backendURL}/${type}/update-tokens/`,
+        {PricingData}
+      );
+
+      if (res.data.status === "updated") {
+        toast.success("Tokens updated");
+      }
+    } catch (err) {
+      toast.error("Updation failed");
+      console.error(err);
+    }finally{
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -43,17 +86,17 @@ export default function PricingPage({ initialData }) {
         <div className="flex bg-gray-800 rounded-full p-1 w-72 justify-between items-center shadow-lg border border-gray-600">
           <button
             onClick={() => setIsStudent(false)}
-            className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 ${
-              !isStudent ? "bg-linear-to-r from-blue-500 to-green-400 text-white" : "text-gray-400"
-            }`}
+            className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 
+              ${!isStudent ? "bg-linear-to-r from-blue-500 to-green-400 text-white" : "text-gray-400"}
+              ${(type && type==='std') ?'hidden':'block'}`}
           >
             Organization
           </button>
           <button
             onClick={() => setIsStudent(true)}
-            className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 ${
-              isStudent ? "bg-linear-to-r from-purple-600 to-pink-600 text-white" : "text-gray-400"
-            }`}
+            className={`flex-1 text-center py-2 rounded-full font-semibold transition-all duration-300 
+             ${isStudent ? "bg-linear-to-r from-purple-600 to-pink-600 text-white" : "text-gray-400"}
+             ${(type && type==='org')?'hidden':'block'}`}
           >
             Student
           </button>
@@ -81,25 +124,30 @@ export default function PricingPage({ initialData }) {
               <p className={`text-3xl font-extrabold mb-6 ${isSelected ? "text-white" : "text-gray-200"}`}>
                 ₹{plan.price}
               </p>
-
               <ul className={`text-sm space-y-2 mb-6 text-center ${isSelected ? "text-white/90" : "text-gray-300"}`}>
-                <li>{plan.Tokens} Tokens</li>
+                <li className="flex items-center justify-center gap-2">
+                  <span><b>{plan.Tokens}</b></span>
+                  <img src="./Logo.png" alt="Tokens" className="w-4 h-4" />
+                </li>
                 <li>~ ₹{Math.floor(plan.price / plan.Tokens)} per Schedule</li>
               </ul>
-
-              <div className="flex justify-center w-full mt-auto">
+              <div className={` ${IsLocation?'block':'hidden'} flex justify-center w-full mt-auto`}>
                 <button
                   onClick={() => handlePurchase(plan.Tokens)}
                   className="px-6 py-2 rounded-lg font-semibold transition-all duration-300 bg-white text-purple-700 hover:scale-105"
                 >
-                  PURCHASE
+                {IsLoading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    "Purchase"
+                )}
                 </button>
               </div>
             </div>
           );
         })}
       </div>
-      <div className="mt-10 text-lg">For Collaboritive works and partnership contact us @<a href="mailto::nishantsingh.talk@gmail.com" className="hover:text-teal-400 text-gray-300">nishantsingh.talk@gmail.com</a></div>
+      <div className={`mt-10 text-lg ${type==='org'?'block':'hidden'}`}>For Collaboritive works and partnership contact us @<a href="mailto::nishantsingh.talk@gmail.com" className="hover:text-teal-400 text-gray-300">nishantsingh.talk@gmail.com</a></div>
     </div>
   );
 }

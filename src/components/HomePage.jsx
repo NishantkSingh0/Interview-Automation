@@ -6,13 +6,16 @@ import Typed from "typed.js";
 export default function DropboxFrontPage() {
   const navigate = useNavigate();  
   const images = [
-    "Marketing/IMG-1.jpeg",
-    "Marketing/IMG-2.jpeg",
-    "Marketing/IMG-3.jpeg",
-    "Marketing/IMG-4.jpeg",
-    "Marketing/IMG-5.jpeg",
-    "Marketing/IMG-6.jpeg",
-    "Marketing/IMG-7.jpeg",
+    "Marketing/IMG-1.png",
+    "Marketing/IMG-2.png",
+    "Marketing/IMG-3.png",
+    "Marketing/IMG-4.png",
+    "Marketing/IMG-5.png",
+    "Marketing/IMG-6.png",
+    "Marketing/IMG-7.png",
+    "Marketing/IMG-8.png",
+    "Marketing/IMG-9.png",
+    "Marketing/IMG-10.png",
   ];
 
   const Features = [
@@ -159,15 +162,12 @@ export default function DropboxFrontPage() {
                 className={`rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-gray-800 hover:scale-105 transition-transform duration-300 ${
                   isCenter ? "z-10" : "z-0"
                 }`}
-                style={{
-                  width: isCenter ? "40%" : "30%",
-                  minHeight: "270px",
-                }}
+                style={{ width: "32%" }}
               >
                 <img
                   src={images[index] || ""}
                   alt={`feature-${index}`}
-                  className="w-full h-75 object-cover"
+                  className="w-full aspect-6/4 object-cover"
                   draggable="false"
                 />
               </motion.div>
@@ -196,7 +196,7 @@ export default function DropboxFrontPage() {
           <li><a href="#" className="hover:text-teal-400 transition-colors">What's new We provide</a></li>
           <li><a href="#" className="hover:text-teal-400 transition-colors">Home Page</a></li>
           <li><a href="#" className="hover:text-teal-400 transition-colors">Features Page</a></li>
-          <li><a href="https://interview-automation-psi.vercel.app/#/Pricings" target="_blank" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
+          <li><a href="http://localhost:5173/Interview-Automation/#/Pricings" target="_blank" className="hover:text-teal-400 transition-colors">Pricing Section</a></li>
         </ul>
       </div>
 

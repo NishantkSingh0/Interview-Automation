@@ -71,9 +71,9 @@ export default function OrgLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 text-white px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-950 via-gray-900 to-indigo-950 text-white px-4">
 
-      <div className="w-full max-w-md bg-gray-900/90 backdrop-blur border border-gray-800 rounded-2xl shadow-2xl p-8">
+      <div className="w-full max-w-lg bg-gray-900/90 backdrop-blur border border-gray-800 rounded-2xl shadow-2xl p-8">
 
         {/* Header */}
         <div className="mb-8 text-center">

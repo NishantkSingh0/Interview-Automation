@@ -1,6 +1,7 @@
 # API/views.py
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 from .models import Student, Candidate
 
 # ------------------------
@@ -74,7 +75,7 @@ def get_student(request):
 @api_view(['PUT'])
 def update_tokens(request):
     email = request.data.get("email")
-    tokens = int(request.data.get("tokens", 0))
+    tokens = int(request.data.get("TokensToAdd", 0))
     try:
         student = Student.objects.get(StudentMail=email)
         student.Tokens += tokens
@@ -86,29 +87,47 @@ def update_tokens(request):
         return Response({"error": "Student not found"}, status=404)
 
 
-# ------------------------
-# Update Resume text
-# ------------------------
-@api_view(['POST'])
-def update_resume(request):
-    email = request.data.get("email")
-    new_resume = request.data.get("resume")
-    if not email or new_resume is None:
-        print("update_resume called.. Status: error")
-        return Response({"status": "error", "message": "Email and resume content required"}, status=400)
+# Update Std Details
+@api_view(['PUT'])
+def update_info(request):
+    email = request.data.get("StudentMail")
+
+    if not email:
+        return Response(
+            {"status": "email_required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
-        student = Student.objects.get(StudentMail=email)
-        if student.Resume == new_resume:
-            print("update_resume called.. Status: no_change")
-            return Response({"status": "no_change", "message": "Resume is the same as before"})
-        student.Resume = new_resume
-        print("update_resume called.. Status: success")
-        student.save()
-        return Response({"status": "success", "message": "Resume updated successfully"})
+        std = Student.objects.get(StudentMail=email)
     except Student.DoesNotExist:
-        print("update_resume called.. Status: not_found")
-        return Response({"status": "not_found", "message": "Student not found"}, status=404)
+        return Response(
+            {"status": "not_found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    # Update only provided fields
+    std.StudentName = request.data.get("StudentName", std.StudentName)
+    std.Designation = request.data.get("Designation", std.Designation)
+    std.ExpectedPosition = request.data.get("ExpectedPosition", std.ExpectedPosition)
+    std.Resume = request.data.get("Resume", std.Resume)
+
+    std.save()
+
+    print("update_org called.. Status: updated")
+    return Response(
+        {
+            "status": "updated",
+            "data": {
+                "StudentMail": std.StudentMail,
+                "StudentName": std.StudentName,
+                "Designation": std.Designation,
+                "ExpectedPosition": std.ExpectedPosition,
+                "Resume": std.Resume,
+            }
+        },
+        status=status.HTTP_200_OK
+    )
 
 
 # ------------------------
