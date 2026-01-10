@@ -1,1 +1,1 @@
-[▶️ Click to watch the demo](public/Untitled_design.mp4)
+<video src="public/Untitled_design.mp4" controls></video>
